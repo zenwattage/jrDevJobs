@@ -1,6 +1,6 @@
 
 
-const fetch = require('node-fetch');
+var fetch = require('node-fetch');
 
 var redis = require("redis"),
     client = redis.createClient();
@@ -14,6 +14,8 @@ const baseURL = 'https://jobs.github.com/positions.json';
 
 async function fetchGithub() {
 
+
+    console.log("Fetching Github Jobs");
 
     let resultCount = 1, onPage = 0;
     //hold results from api
@@ -32,14 +34,12 @@ async function fetchGithub() {
 
     }
 
-
-
     console.log('got', allJobs.length, ' jobs total');
 
     //filter out senior and manager jobs
     const jrJobs = allJobs.filter(job => {
         const jobTitle = job.title.toLowerCase();
-        let isJunior = true;
+        // let isJunior = true;
 
 
         //sort through titles that include non-junior job titles
